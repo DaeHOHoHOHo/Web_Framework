@@ -107,7 +107,27 @@ var ImageController = {
             }
         });
         
-    }
+    },
+    remove: function(req, res) {
+        Models.Image.findOne({ filename: { $regex: req.params.image_id } },
+        function(err, image) {
+            if (err) { throw err; }
+            fs.unlink(path.resolve('./public/upload/' + image.filename), 
+            function(err) {
+                if (err) { throw err; }
+                Models.Comment.remove({ image_id: image._id}, 
+                function(err) {
+                    image.remove(function(err) {
+                        if (!err) {
+                        res.json(true);
+                            } else {
+                        res.json(false);
+                            }
+                        });
+                    });
+                });
+        });
+    }        
 };
 
 module.exports = ImageController;

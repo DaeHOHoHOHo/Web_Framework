@@ -16,6 +16,11 @@
                 </strong> &nbsp; - &nbsp; <i class="fa fa-eye"> 
                 </i> <strong>{{ image.views }}</strong>&nbsp; - &nbsp; Posted: <em class="text-muted">{{ timeago image.timestamp }}</em>
             </div>
+            <div class="col-md-4 text-right">
+                <button class="btnbtn-danger" id="btn-delete" data-id="{{ image.uniqueId }}">
+                <i class="fafa-times"></i>
+                </button>
+            </div>
         </div>
     </div>
 </div>
